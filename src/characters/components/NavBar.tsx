@@ -5,11 +5,11 @@ export const NavBar = () => {
   const location = useLocation();
 
   return (
-    <div className="px-4 h-10 flex items-center justify-start bg-black rounded-md border-2 border-gray-600 text-white">
-      <div className="">
-        <img src={RickAndMortyTitle} className="h-9" />
+    <div className="shrink-0 flex-col sm:flex-row sm:px-4 h-auto sm:h-auto py-2 gap-y-2 sm:gap-y-0 flex items-center  justify-start bg-black rounded-md border-2 border-gray-600 text-white">
+      <div className="flex shrink-0 w-auto justify-center sm:justify-start">
+        <img src={RickAndMortyTitle} className="h-9 w-auto" />
       </div>
-      <ul className="flex items-center justify-center w-full gap-4">
+      <ul className="flex w-full items-center justify-center gap-4 pb-2 sm:pb-0">
         <li
           className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/character" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-125"}`}
         >
