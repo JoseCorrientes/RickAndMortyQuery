@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Define el nombre de la variable con el prefijo --font- */
+  --font-fredoka: "Fredoka", sans-serif;
+}
+:root {
+  --gris-tarjeta: #3d3e43;
+  --gris-tarjeta-letras: #9fa1a6;
+}
+
+body,
+html {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  scrollbar-gutter: stable;
+}
