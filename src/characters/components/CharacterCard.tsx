@@ -32,7 +32,7 @@ export const CharacterCard = ({
     <Link to={`/character/${id}`}>
       <div
         key={id}
-        className="bg-(--gris-tarjeta) rounded-md shadow-md flex flex-row flex-nowrap justify-start shrink-0 h-full"
+        className="bg-(--gris-tarjeta) rounded-md shadow-md flex flex-row flex-nowrap justify-start shrink-0 h-full hover:shadow-lg hover:shadow-amber-700 hover:border-2 hover:border-amber-700"
       >
         <div className="flex w-1/3 h-full rounded-bl-md rounded-tl-md bg-white overflow-hidden aspect-square">
           <img className="w-full h-full object-cover" src={image} />

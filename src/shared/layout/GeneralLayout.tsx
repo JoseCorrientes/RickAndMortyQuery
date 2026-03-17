@@ -11,14 +11,16 @@ export const GeneralLayout = () => {
       ? "All Characters"
       : location.pathname === "/character/alien"
         ? "Alien Characters"
-        : "Human Characters";
+        : location.pathname === "/character/human"
+          ? "Human Characters"
+          : "Character Card";
 
   return (
-    <div className="p-2 bg-black w-screen min-h-screen">
+    <div className="flex-col justify-center p-2 bg-black w-screen min-h-screen">
       <NavBar />
       <MainTitle name={name} />
 
-      <SearchBar />
+      {name !== "Character Card" && <SearchBar />}
       <Outlet />
     </div>
   );
