@@ -6,5 +6,5 @@ I will uploading in differentes stages of developing.
 
 # Install
 
--npm install
+-npm install<br>
 -create .env file using the .env.template
