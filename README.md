@@ -10,5 +10,5 @@ InfiniteQuery on All List - unimplemented yet
 
 # Install
 
-npm i
-create .env file using the .env.template
+-npm install<br>
+-create .env file using the .env.template
