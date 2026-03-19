@@ -1,6 +1,13 @@
 import { FaCircle } from "react-icons/fa";
-import { type Gender, type Species, type Status, type Location } from "..";
+import {
+  type Gender,
+  type Species,
+  type Status,
+  type Location,
+  charactersActions,
+} from "..";
 import { Link } from "react-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   id: number;
@@ -28,8 +35,17 @@ export const CharacterCard = ({
   gender,
   type,
 }: Props) => {
+  const queryClient = useQueryClient();
+
+  const handlePrefetchCharacter = (id: number) => {
+    charactersActions.prefetchSingleCharacter(queryClient, id);
+  };
+
   return (
-    <Link to={`/character/${id}`}>
+    <Link
+      to={`/character/${id}`}
+      onMouseEnter={() => handlePrefetchCharacter(id)}
+    >
       <div
         key={id}
         className="bg-(--gris-tarjeta) rounded-md shadow-md flex flex-row flex-nowrap justify-start shrink-0 h-full hover:shadow-lg hover:shadow-amber-700 hover:border-2 hover:border-amber-700"

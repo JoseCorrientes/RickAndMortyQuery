@@ -1,4 +1,4 @@
-import RickAndMortyTitle from "../assets/RickAndMortyTitle.png";
+import RickAndMortyTitle2 from "../assets/RickAndMortyTitle2.png";
 import { Link, useLocation } from "react-router";
 
 export const NavBar = () => {
@@ -7,7 +7,7 @@ export const NavBar = () => {
   return (
     <div className="shrink-0 flex-col sm:flex-row sm:px-4 h-auto sm:h-auto py-2 gap-y-2 sm:gap-y-0 flex items-center  justify-start bg-black rounded-md border-2 border-gray-600 text-white">
       <div className="flex shrink-0 w-auto justify-center sm:justify-start">
-        <img src={RickAndMortyTitle} className="h-9 w-auto" />
+        <img src={RickAndMortyTitle2} className="h-9 w-auto" />
       </div>
       <ul className="flex w-full items-center justify-center gap-4 pb-2 sm:pb-0">
         <li

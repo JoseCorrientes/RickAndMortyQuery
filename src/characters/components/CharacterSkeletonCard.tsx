@@ -1,6 +1,6 @@
 export const CharacterSkeletonCard = () => {
   return (
-    <div className="animate-pulse min-h-56 max-h-70 w-full min-w-80 max-w-142 bg-gray-400  border-2 border-gray-600 rounded-md flex flex-row flex-nowrap justify-start shrink-0 ">
+    <div className="min-h-56 max-h-70 w-full min-w-80 max-w-142 bg-gray-400  border-2 border-gray-600 rounded-md flex flex-row flex-nowrap justify-start shrink-0 ">
       <div
         className="
        flex w-1/3 h-full rounded-bl-md rounded-tl-md b"
