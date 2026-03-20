@@ -7,8 +7,6 @@ export const CharacterSkeletonCard = () => {
       >
         <div className="rounded-bl-md rounded-tl-md  h-auto w-full m-2 bg-gray-500 " />
       </div>
-      {/* resto info */}
-
       <div className="flex-col w-2/3 py-2 px-4">
         <div className="bg-gray-500 w-40 h-8 rounded-sm  " />
 

@@ -1,6 +1,10 @@
 import { CharacterSkeletonList, CharacterGrid, useCharacters } from "..";
+import { useLocation } from "react-router";
 
 export const CharactersList = () => {
+  const location = useLocation();
+  const backPage = location.state?.backListPage ?? 1;
+
   const {
     useCharactersResponse,
     prevButtonActive,
@@ -8,7 +12,7 @@ export const CharactersList = () => {
     nextPage,
     previousPage,
     page,
-  } = useCharacters({});
+  } = useCharacters({ species: "All", backPage });
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full border-2">
@@ -16,7 +20,7 @@ export const CharactersList = () => {
         <div className="flex justify-center items-center gap-4">
           <button
             onClick={previousPage}
-            className={`px-4 py-2 rounded-md ${prevButtonActive ? "text-white bg-gray-400 cursor-pointer" : "text-gray-600 bg-gray-800"}`}
+            className={`px-4 py-2 rounded-md ${prevButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >
             Prev
           </button>
@@ -26,7 +30,7 @@ export const CharactersList = () => {
           </span>
           <button
             onClick={nextPage}
-            className={`px-4 py-2 rounded-md ${nextButtonActive ? "text-white bg-gray-400 cursor-pointer" : "text-gray-600 bg-gray-800"}`}
+            className={`px-4 py-2 rounded-md ${nextButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >
             Next
           </button>
@@ -34,13 +38,17 @@ export const CharactersList = () => {
       )}
       {useCharactersResponse.isLoading && <CharacterSkeletonList />}
       {useCharactersResponse.data?.results && (
-        <CharacterGrid characters={useCharactersResponse.data?.results} />
+        <CharacterGrid
+          page={page}
+          backSpecies="All"
+          characters={useCharactersResponse.data?.results}
+        />
       )}
       {useCharactersResponse.data?.results && (
         <div className="flex justify-center items-center gap-4">
           <button
             onClick={previousPage}
-            className={`px-4 py-2 rounded-md ${prevButtonActive ? "text-white bg-gray-400 cursor-pointer" : "text-gray-600 bg-gray-800"}`}
+            className={`px-4 py-2 rounded-md ${prevButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >
             Prev
           </button>
@@ -50,7 +58,7 @@ export const CharactersList = () => {
           </span>
           <button
             onClick={nextPage}
-            className={`px-4 py-2 rounded-md ${nextButtonActive ? "text-white bg-gray-400 cursor-pointer" : "text-gray-600 bg-gray-800"}`}
+            className={`px-4 py-2 rounded-md ${nextButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lghover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >
             Next
           </button>

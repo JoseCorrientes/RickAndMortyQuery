@@ -23,6 +23,7 @@ export const SingleCharacterSkeletonCard = () => {
 
         <div className="flex shrink bg-gray-500 sm:w-40 h-4 rounded-sm mt-4" />
       </div>
+      {/* <div className="w-15 h-10 rounded-md bg-gray-500" /> */}
     </div>
   );
 };

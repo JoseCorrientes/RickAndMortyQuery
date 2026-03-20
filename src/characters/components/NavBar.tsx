@@ -11,27 +11,30 @@ export const NavBar = () => {
       </div>
       <ul className="flex w-full items-center justify-center gap-4 pb-2 sm:pb-0">
         <li
-          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/character" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-125"}`}
+          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/character" || location.state?.backSpecies == "All" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-125"}`}
         >
-          {location.pathname === "/character" ? (
+          {location.pathname === "/character" ||
+          location.state?.backSpecies == "All" ? (
             <h1 className="cursor-default">All</h1>
           ) : (
             <Link to={"/character"}>All</Link>
           )}
         </li>
         <li
-          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/character/human" ? "text-gray-100 rounded-lg bg-gray-500 " : "text-white  hover:scale-125"}`}
+          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/character/human" || location.state?.backSpecies == "Human" ? "text-gray-100 rounded-lg bg-gray-500 " : "text-white  hover:scale-125"}`}
         >
-          {location.pathname === "/character/human" ? (
+          {location.pathname === "/character/human" ||
+          location.state?.backSpecies == "Human" ? (
             <h1 className="cursor-default">Humans</h1>
           ) : (
             <Link to={"/character/human"}>Humans</Link>
           )}
         </li>
         <li
-          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/character/alien" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-125"}`}
+          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/character/alien" || location.state?.backSpecies == "Alien" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-125"}`}
         >
-          {location.pathname === "/character/alien" ? (
+          {location.pathname === "/character/alien" ||
+          location.state?.backSpecies == "Alien" ? (
             <h1 className="cursor-default">Aliens</h1>
           ) : (
             <Link to={"/character/alien"}>Aliens</Link>

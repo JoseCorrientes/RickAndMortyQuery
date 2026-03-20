@@ -1,6 +1,10 @@
+import { useLocation } from "react-router";
 import { useCharacters, CharacterGrid, CharacterSkeletonList } from "..";
 
 export const CharactersHumanList = () => {
+  const location = useLocation();
+  const backPage = location.state?.backListPage ?? 1;
+
   const {
     useCharactersResponse,
     prevButtonActive,
@@ -8,7 +12,7 @@ export const CharactersHumanList = () => {
     nextPage,
     previousPage,
     page,
-  } = useCharacters({ species: "Human" });
+  } = useCharacters({ species: "Human", backPage });
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full border-2">
@@ -34,7 +38,11 @@ export const CharactersHumanList = () => {
       )}
       {useCharactersResponse.isLoading && <CharacterSkeletonList />}
       {useCharactersResponse.data?.results && (
-        <CharacterGrid characters={useCharactersResponse.data?.results} />
+        <CharacterGrid
+          page={page}
+          backSpecies="Human"
+          characters={useCharactersResponse.data?.results}
+        />
       )}
       {useCharactersResponse.data?.results && (
         <div className="flex justify-center items-center gap-4">

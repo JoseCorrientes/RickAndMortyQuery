@@ -4,10 +4,11 @@ import { useState } from "react";
 
 interface Options {
   species?: string;
+  backPage: number;
 }
 
-export const useCharacters = ({ species = "All" }: Options) => {
-  const [page, setPage] = useState(1);
+export const useCharacters = ({ species, backPage }: Options) => {
+  const [page, setPage] = useState(backPage);
 
   const useCharactersResponse = useQuery({
     queryKey: ["characters", { species, page }],
@@ -20,7 +21,6 @@ export const useCharacters = ({ species = "All" }: Options) => {
     if (useCharactersResponse.data?.info.next !== null)
       setPage((prev) => prev + 1);
   };
-
   const previousPage = () => {
     if (page === 1) return;
     setPage((prev) => prev - 1);

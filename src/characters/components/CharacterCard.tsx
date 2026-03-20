@@ -19,9 +19,8 @@ interface Props {
   gender: Gender;
   origin: Location;
   location: Location;
-  //   episode: string[];
-  //   url: string;
-  //   created: string;
+  page: number;
+  backSpecies: string;
 }
 
 export const CharacterCard = ({
@@ -34,21 +33,28 @@ export const CharacterCard = ({
   origin,
   gender,
   type,
+  page,
+  backSpecies,
 }: Props) => {
   const queryClient = useQueryClient();
 
-  const handlePrefetchCharacter = (id: number) => {
-    charactersActions.prefetchSingleCharacter(queryClient, id);
+  const handlePrefetchCharacter = async (id: number) => {
+    queryClient.prefetchQuery({
+      queryKey: ["character", id],
+      queryFn: () => charactersActions.getSingleProduct(id),
+      staleTime: 1000 * 60 * 60, // 1 hora
+    });
   };
 
   return (
     <Link
       to={`/character/${id}`}
+      state={{ backPage: page, backSpecies }}
       onMouseEnter={() => handlePrefetchCharacter(id)}
     >
       <div
         key={id}
-        className="bg-(--gris-tarjeta) rounded-md shadow-md flex flex-row flex-nowrap justify-start shrink-0 h-full hover:shadow-lg hover:shadow-amber-700 hover:border-2 hover:border-amber-700"
+        className="bg-(--gris-tarjeta) rounded-md shadow-md flex flex-row flex-nowrap justify-start shrink-0 h-full hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
       >
         <div className="flex w-1/3 h-full rounded-bl-md rounded-tl-md bg-white overflow-hidden aspect-square">
           <img className="w-full h-full object-cover" src={image} />
