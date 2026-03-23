@@ -2,20 +2,42 @@ import { FaCircle } from "react-icons/fa";
 import { SingleCharacterSkeletonCard, useSingleCharacter } from "..";
 import { Link, useLocation } from "react-router";
 
+import { toast } from "sonner";
+import { useEffect } from "react";
+
 export const CharacterById = () => {
   const { pathname } = useLocation();
   const [, , idBuscar] = pathname.split("/");
 
   const { singleCharacterQuery } = useSingleCharacter(+idBuscar);
-  const { data, isLoading } = singleCharacterQuery;
+  const { data, isLoading, isError } = singleCharacterQuery;
 
   const location = useLocation();
   const backListPage = location.state?.backPage ?? 1;
   const backSpecies = location.state?.backSpecies ?? "All";
 
+  useEffect(() => {
+    if (isError) toast.error("Server Error. Try Later...");
+  }, [isError]);
+
   return (
     <div className="flex flex-col items-center">
       <div className="sm:h-100 flex justify-center">
+        {isError && (
+          <div className="flex flex-col items-center justify-center ">
+            <h1 className="mt-10 text-white text-4xl w-screen h-auto text-center font-black font-fredoka">
+              No available card...
+            </h1>
+            <Link
+              to={`/character${backSpecies === "All" ? "" : backSpecies === "Alien" ? "/alien" : "/human"}`}
+              state={{ backListPage }}
+              className="w-auto h-auto px-4 py-2 mt-20 bg-gray-400 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
+            >
+              Back
+            </Link>
+          </div>
+        )}
+
         {isLoading && <SingleCharacterSkeletonCard />}
         {data && (
           <div

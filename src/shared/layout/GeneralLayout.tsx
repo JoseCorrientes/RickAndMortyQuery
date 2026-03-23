@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router";
 import { NavBar, SearchBar } from "../../characters";
 import { MainTitle } from "..";
-// import { useState } from "react";
+import { Toaster } from "sonner";
 
 export const GeneralLayout = () => {
   const location = useLocation();
@@ -22,6 +22,18 @@ export const GeneralLayout = () => {
 
       {name !== "Character Card" && <SearchBar />}
       <Outlet />
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          style: {
+            fontSize: "25px",
+            fontWeight: "bold",
+            border: "2px solid red",
+            color: "rgb(131, 9, 9)",
+            alignItems: "center",
+          },
+        }}
+      />
     </div>
   );
 };

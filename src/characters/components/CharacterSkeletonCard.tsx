@@ -1,7 +1,7 @@
 export const CharacterSkeletonCard = () => {
   return (
     <div className="min-h-56 max-h-70 w-full min-w-80 max-w-142 bg-gray-400  border-2 border-gray-600 rounded-md flex flex-row flex-nowrap justify-start shrink-0 ">
-      <div
+      {/* <div
         className="
        flex w-1/3 h-full rounded-bl-md rounded-tl-md b"
       >
@@ -21,7 +21,7 @@ export const CharacterSkeletonCard = () => {
         <div className="bg-gray-500 w-25 h-2 rounded-sm mt-6  " />
 
         <div className="bg-gray-500 w-40 h-4 rounded-sm mt-4" />
-      </div>
+      </div> */}
     </div>
   );
 };

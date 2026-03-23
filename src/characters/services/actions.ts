@@ -12,6 +12,7 @@ export const getProducts = async ({
   page = 1,
 }: GetProductsOptions): Promise<CharactersPage> => {
   await slow(2);
+
   let filter = page ? `/?page=${page}` : "";
   filter = filter + (species && species != "All" ? `&species=${species}` : "");
   const { data } = await charactersApi.get<CharactersPage>(
@@ -21,7 +22,8 @@ export const getProducts = async ({
 };
 
 export const getSingleProduct = async (id: number): Promise<Character> => {
-  await slow(4);
+  await slow(2);
+
   const { data } = await charactersApi.get<Character>(`/character/${id}`);
   return data;
 };

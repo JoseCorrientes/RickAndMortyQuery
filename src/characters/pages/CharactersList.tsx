@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { CharacterSkeletonList, CharacterGrid, useCharacters } from "..";
 import { useLocation } from "react-router";
+import { toast } from "sonner";
 
 export const CharactersList = () => {
   const location = useLocation();
@@ -14,8 +16,19 @@ export const CharactersList = () => {
     page,
   } = useCharacters({ species: "All", backPage });
 
+  useEffect(() => {
+    if (useCharactersResponse.isError)
+      toast.error("Server Error. Try Later...");
+  }, [useCharactersResponse]);
+
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full border-2">
+    <div className="flex flex-col justify-center items-center w-full h-full">
+      {useCharactersResponse.isError && (
+        <h1 className="mt-10 text-white text-4xl w-screen h-auto text-center font-black font-fredoka">
+          No available cards...
+        </h1>
+      )}
+
       {useCharactersResponse.data?.results && (
         <div className="flex justify-center items-center gap-4">
           <button

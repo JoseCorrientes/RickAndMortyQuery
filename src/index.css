@@ -18,4 +18,6 @@ html {
   min-width: 320px;
   min-height: 100vh;
   scrollbar-gutter: stable;
+  overflow-x: hidden;
+  background-color: black;
 }
