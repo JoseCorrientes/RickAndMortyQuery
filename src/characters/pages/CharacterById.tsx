@@ -20,6 +20,14 @@ export const CharacterById = () => {
     if (isError) toast.error("Server Error. Try Later...");
   }, [isError]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <div className="flex flex-col items-center">
       <div className="sm:h-100 flex justify-center">
