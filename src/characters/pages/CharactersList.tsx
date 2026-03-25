@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { CharacterSkeletonList, CharacterGrid, useCharacters } from "..";
-import { useLocation } from "react-router";
 import { toast } from "sonner";
+import { useSearchParams } from "react-router";
 
 export const CharactersList = () => {
-  const location = useLocation();
-  const backPage = location.state?.backListPage ?? 1;
+  //   const [searchParams, setSearchParams] = useSearchParams();
+
+  window.moveTo(0, 0);
 
   const {
     useCharactersResponse,
@@ -14,7 +15,15 @@ export const CharactersList = () => {
     nextPage,
     previousPage,
     page,
-  } = useCharacters({ species: "All", backPage });
+  } = useCharacters({ species: "All" });
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   useEffect(() => {
     if (useCharactersResponse.isError)

@@ -6,7 +6,9 @@ I will uploading in differentes stages of developing.
 
 - Implemented manual paging over All, Humans and Aliens
 - Implemented Error management
-  Search box - unimplemented yet
+- Implemented Search Box
+  Characters List Route Refactorization - umpmplemented yet
+
   InfiniteQuery on All List - unimplemented yet
 
 # Install

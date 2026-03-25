@@ -6,7 +6,7 @@ import {
   type Location,
   charactersActions,
 } from "..";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
@@ -38,6 +38,8 @@ export const CharacterCard = ({
 }: Props) => {
   const queryClient = useQueryClient();
 
+  const URLlocation = useLocation();
+
   const handlePrefetchCharacter = async (id: number) => {
     queryClient.prefetchQuery({
       queryKey: ["character", id],
@@ -49,7 +51,7 @@ export const CharacterCard = ({
   return (
     <Link
       to={`/character/${id}`}
-      state={{ backPage: page, backSpecies }}
+      state={{ backPage: page, backSpecies, from: URLlocation }}
       onMouseEnter={() => handlePrefetchCharacter(id)}
     >
       <div

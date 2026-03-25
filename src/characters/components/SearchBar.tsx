@@ -1,11 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useSearchParams } from "react-router";
 
 export const SearchBar = () => {
-  const [search, setSearch] = useState("");
+  const [searchParams, setsearchParams] = useSearchParams();
+  const [search, setSearch] = useState<string>("");
 
-  const onHandleChange = (e) => {
-    console.log(e.target.value);
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      const nameInURL = searchParams.get("name") || "";
+      if (search !== nameInURL) {
+        const params = new URLSearchParams(searchParams);
+        if (search) {
+          params.set("name", search);
+        } else {
+          params.delete("name");
+        }
+        params.set("page", "1");
+        setsearchParams(params);
+      }
+    }, 1500);
+
+    return () => clearTimeout(timeoutID);
+  }, [search, searchParams, setsearchParams]);
+
+  const onHandleChange = (e: { target: { value: string } }) => {
     setSearch(e.target.value);
   };
 

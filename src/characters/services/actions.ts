@@ -1,22 +1,26 @@
-import { QueryClient } from "@tanstack/react-query";
 import { type Character, charactersApi, type CharactersPage } from "..";
 import { slow } from "../../shared";
 
 interface GetProductsOptions {
   species?: string;
   page?: number;
+  name?: string;
 }
 
 export const getProducts = async ({
   species,
   page = 1,
+  name,
 }: GetProductsOptions): Promise<CharactersPage> => {
   await slow(2);
 
-  let filter = page ? `/?page=${page}` : "";
-  filter = filter + (species && species != "All" ? `&species=${species}` : "");
+  const params = new URLSearchParams();
+  if (name) params.append("name", name);
+  if (page) params.append("page", page.toString());
+  if (species && species !== "All") params.append("species", species);
+
   const { data } = await charactersApi.get<CharactersPage>(
-    `/character${filter}`,
+    `/character/?${params.toString()}`,
   );
   return data;
 };

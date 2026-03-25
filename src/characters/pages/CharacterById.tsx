@@ -1,6 +1,6 @@
 import { FaCircle } from "react-icons/fa";
 import { SingleCharacterSkeletonCard, useSingleCharacter } from "..";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 import { toast } from "sonner";
 import { useEffect } from "react";
@@ -12,9 +12,12 @@ export const CharacterById = () => {
   const { singleCharacterQuery } = useSingleCharacter(+idBuscar);
   const { data, isLoading, isError } = singleCharacterQuery;
 
+  const navigate = useNavigate();
+
   const location = useLocation();
-  const backListPage = location.state?.backPage ?? 1;
   const backSpecies = location.state?.backSpecies ?? "All";
+  const backURL =
+    location?.state?.from?.pathname + location?.state?.from?.search;
 
   useEffect(() => {
     if (isError) toast.error("Server Error. Try Later...");
@@ -36,13 +39,13 @@ export const CharacterById = () => {
             <h1 className="mt-10 text-white text-4xl w-screen h-auto text-center font-black font-fredoka">
               No available card...
             </h1>
-            <Link
-              to={`/character${backSpecies === "All" ? "" : backSpecies === "Alien" ? "/alien" : "/human"}`}
-              state={{ backListPage }}
+            <button
+              onClick={() => navigate(-1)}
+              //   state={{ backListPage }}
               className="w-auto h-auto px-4 py-2 mt-20 bg-gray-400 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
             >
               Back
-            </Link>
+            </button>
           </div>
         )}
 
@@ -95,8 +98,7 @@ export const CharacterById = () => {
       </div>
       {data && backSpecies === "All" && (
         <Link
-          to={`/character`}
-          state={{ backListPage }}
+          to={backURL}
           className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
         >
           Back
@@ -104,8 +106,7 @@ export const CharacterById = () => {
       )}
       {data && backSpecies === "Alien" && (
         <Link
-          to={`/character/alien`}
-          state={{ backListPage }}
+          to={backURL}
           className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
         >
           Back
@@ -113,8 +114,7 @@ export const CharacterById = () => {
       )}
       {data && backSpecies === "Human" && (
         <Link
-          to={`/character/human`}
-          state={{ backListPage }}
+          to={backURL}
           className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
         >
           Back
