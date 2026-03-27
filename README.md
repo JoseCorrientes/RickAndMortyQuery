@@ -1,4 +1,4 @@
-# Rick adn Morty Query
+# Rick and Morty Query
 
 ## Info
 
@@ -14,7 +14,7 @@ I will uploading in differentes stages of developing.
   Favorties Card - unimplemented yet<br>
   InfiniteQuery on All List - unimplemented yet
 
-# Install
+## Install
 
 -npm install<br>
 -create .env file using the .env.template
