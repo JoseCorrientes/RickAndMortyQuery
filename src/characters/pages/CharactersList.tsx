@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { CharacterSkeletonList, CharacterGrid, useCharacters } from "..";
 import { toast } from "sonner";
-import { useSearchParams } from "react-router";
 
 export const CharactersList = () => {
-  //   const [searchParams, setSearchParams] = useSearchParams();
-
   window.moveTo(0, 0);
 
   const {
@@ -15,7 +12,8 @@ export const CharactersList = () => {
     nextPage,
     previousPage,
     page,
-  } = useCharacters({ species: "All" });
+    species,
+  } = useCharacters();
 
   useEffect(() => {
     window.scrollTo({
@@ -41,6 +39,7 @@ export const CharactersList = () => {
       {useCharactersResponse.data?.results && (
         <div className="flex justify-center items-center gap-4">
           <button
+            disabled={!prevButtonActive}
             onClick={previousPage}
             className={`px-4 py-2 rounded-md ${prevButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >
@@ -51,6 +50,7 @@ export const CharactersList = () => {
             {page}
           </span>
           <button
+            disabled={!nextButtonActive}
             onClick={nextPage}
             className={`px-4 py-2 rounded-md ${nextButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >
@@ -62,13 +62,14 @@ export const CharactersList = () => {
       {useCharactersResponse.data?.results && (
         <CharacterGrid
           page={page}
-          backSpecies="All"
+          backSpecies={species}
           characters={useCharactersResponse.data?.results}
         />
       )}
       {useCharactersResponse.data?.results && (
         <div className="flex justify-center items-center gap-4">
           <button
+            disabled={!prevButtonActive}
             onClick={previousPage}
             className={`px-4 py-2 rounded-md ${prevButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >
@@ -79,6 +80,7 @@ export const CharactersList = () => {
             {page}
           </span>
           <button
+            disabled={!nextButtonActive}
             onClick={nextPage}
             className={`px-4 py-2 rounded-md ${nextButtonActive ? "text-white bg-gray-400 cursor-pointer hover:shadow-lghover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700" : "text-gray-600 bg-gray-800"}`}
           >

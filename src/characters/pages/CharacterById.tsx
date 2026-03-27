@@ -4,20 +4,18 @@ import { Link, useLocation, useNavigate } from "react-router";
 
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { useParams } from "react-router";
 
 export const CharacterById = () => {
-  const { pathname } = useLocation();
-  const [, , idBuscar] = pathname.split("/");
+  const { id } = useParams();
+
+  const idBuscar = id;
 
   const { singleCharacterQuery } = useSingleCharacter(+idBuscar);
   const { data, isLoading, isError } = singleCharacterQuery;
 
-  const navigate = useNavigate();
-
   const location = useLocation();
-  const backSpecies = location.state?.backSpecies ?? "All";
-  const backURL =
-    location?.state?.from?.pathname + location?.state?.from?.search;
+  const backURL = location.state?.from || "/characters/All";
 
   useEffect(() => {
     if (isError) toast.error("Server Error. Try Later...");
@@ -39,13 +37,12 @@ export const CharacterById = () => {
             <h1 className="mt-10 text-white text-4xl w-screen h-auto text-center font-black font-fredoka">
               No available card...
             </h1>
-            <button
-              onClick={() => navigate(-1)}
-              //   state={{ backListPage }}
-              className="w-auto h-auto px-4 py-2 mt-20 bg-gray-400 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
+            <Link
+              to={backURL}
+              className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
             >
               Back
-            </button>
+            </Link>
           </div>
         )}
 
@@ -96,23 +93,7 @@ export const CharacterById = () => {
           </div>
         )}
       </div>
-      {data && backSpecies === "All" && (
-        <Link
-          to={backURL}
-          className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
-        >
-          Back
-        </Link>
-      )}
-      {data && backSpecies === "Alien" && (
-        <Link
-          to={backURL}
-          className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
-        >
-          Back
-        </Link>
-      )}
-      {data && backSpecies === "Human" && (
+      {data && (
         <Link
           to={backURL}
           className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"

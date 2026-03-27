@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { charactersActions } from "..";
-import { useSearchParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 
-interface Options {
-  species?: string;
-}
-
-export const useCharacters = ({ species }: Options) => {
+export const useCharacters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const { species = "All" } = useParams();
+
   const name = searchParams.get("name") || "";
+
   const page = Number(searchParams.get("page")) || 1;
 
   const useCharactersResponse = useQuery({
@@ -40,5 +39,6 @@ export const useCharacters = ({ species }: Options) => {
     nextButtonActive: useCharactersResponse.data?.info.next !== null,
     previousPage,
     nextPage,
+    species,
   };
 };

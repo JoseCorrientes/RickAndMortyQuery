@@ -1,18 +1,18 @@
-import { Outlet, useLocation } from "react-router";
+import { Outlet, useParams } from "react-router";
 import { NavBar, SearchBar } from "../../characters";
 import { MainTitle } from "..";
 import { Toaster } from "sonner";
 
 export const GeneralLayout = () => {
-  const location = useLocation();
+  const { species } = useParams();
 
   const name =
-    location.pathname === "/character"
+    species === "All"
       ? "All Characters"
-      : location.pathname === "/character/alien"
-        ? "Alien Characters"
-        : location.pathname === "/character/human"
-          ? "Human Characters"
+      : species === "human"
+        ? "Human Characters"
+        : species === "alien"
+          ? "Alien Characters"
           : "Character Card";
 
   return (

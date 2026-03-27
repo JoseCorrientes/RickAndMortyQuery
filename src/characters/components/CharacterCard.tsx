@@ -61,7 +61,6 @@ export const CharacterCard = ({
         <div className="flex w-1/3 h-full rounded-bl-md rounded-tl-md bg-white overflow-hidden aspect-square">
           <img className="w-full h-full object-cover" src={image} />
         </div>
-        {/* resto info */}
         <div className="flex-col w-2/3 py-2 px-4">
           <h3 className="w-full text-left font-fredoka text-bold text-2xl text-white font-bold">
             {name}

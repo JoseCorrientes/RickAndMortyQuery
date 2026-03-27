@@ -1,11 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { GeneralLayout } from "../shared";
-import {
-  CharactersAlienList,
-  CharactersHumanList,
-  CharactersList,
-  CharacterById,
-} from "../characters/";
+import { CharactersList, CharacterById } from "../characters/";
 
 export const mainRouter = createBrowserRouter([
   {
@@ -14,24 +9,15 @@ export const mainRouter = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Navigate to={"character"} />,
-      },
-      {
-        path: "character",
-        element: <CharactersList />,
+        element: <Navigate to={"characters/All"} replace />,
       },
       {
         path: "/character/:id",
         element: <CharacterById />,
       },
-
       {
-        path: "/character/alien",
-        element: <CharactersAlienList />,
-      },
-      {
-        path: "character/human",
-        element: <CharactersHumanList />,
+        path: "/characters/:species",
+        element: <CharactersList />,
       },
       {
         path: "*",
