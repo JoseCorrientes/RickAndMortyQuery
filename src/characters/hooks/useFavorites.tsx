@@ -1,12 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { favoriteActions, type Character } from "..";
+import { toast } from "sonner";
 
-const UseFavorites = () => {
-  const favoritesQuery = useQuery({
+export const UseFavorites = () => {
+  const queryClient = useQueryClient();
+
+  const { data: favorites = [] } = useQuery<Character[]>({
     queryKey: ["favorites"],
-    queryFn: () => {},
+    queryFn: favoriteActions.getStoredFavorites,
+    staleTime: Infinity,
   });
 
+  const toggleFavorite = (character: Character) => {
+    const { data, limitReached } = favoriteActions.toggleFavoritesList(
+      favorites,
+      character,
+    );
+
+    if (!limitReached) {
+      const isSaved = favoriteActions.saveFavoritesList(data);
+      if (isSaved) queryClient.setQueryData(["favorites"], data);
+    } else toast("Favorites Limit Reached.  (20 favs)");
+  };
+
   return {
-    favoritesQuery,
+    toggleFavorite,
+    favorites,
   };
 };

@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { GeneralLayout } from "../shared";
-import { CharactersList, CharacterById } from "../characters/";
+import { CharactersList, CharacterById, FavoritesList } from "../characters/";
 
 export const mainRouter = createBrowserRouter([
   {
@@ -18,6 +18,10 @@ export const mainRouter = createBrowserRouter([
       {
         path: "/characters/:species",
         element: <CharactersList />,
+      },
+      {
+        path: "/favorites",
+        element: <FavoritesList />,
       },
       {
         path: "*",

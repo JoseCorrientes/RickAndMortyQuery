@@ -12,6 +12,8 @@ export { NavBar } from "./components/NavBar";
 //hooks
 export { useCharacters } from "./hooks/useCharacters";
 export { useSingleCharacter } from "./hooks/useSingleCharacter";
+export { NavigationButtons } from "./components/NavigationButtons";
+export { UseFavorites } from "./hooks/useFavorites";
 
 //interfaces
 export {
@@ -30,6 +32,8 @@ export { CharacterById } from "./pages/CharacterById";
 export { CharacterSkeletonList } from "./components/CharacterSkeletonList";
 export { CharacterSkeletonCard } from "./components/CharacterSkeletonCard";
 export { SingleCharacterSkeletonCard } from "./components/SingleCharacterSkeletonCard";
+export { FavoritesList } from "../characters/pages/FavoritesList";
 
 //services-Actions
 export * as charactersActions from "./services/actions";
+export * as favoriteActions from "./services/storageActions";

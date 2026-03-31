@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router";
+import { Outlet, useLocation, useParams } from "react-router";
 import { NavBar, SearchBar } from "../../characters";
 import { MainTitle } from "..";
 import { Toaster } from "sonner";
@@ -6,21 +6,28 @@ import { Toaster } from "sonner";
 export const GeneralLayout = () => {
   const { species } = useParams();
 
+  const { pathname } = useLocation();
+
   const name =
-    species === "All"
-      ? "All Characters"
-      : species === "human"
-        ? "Human Characters"
-        : species === "alien"
-          ? "Alien Characters"
-          : "Character Card";
+    pathname === "/favorites"
+      ? "Favorites"
+      : species === "All"
+        ? "All Characters"
+        : species === "human"
+          ? "Human Characters"
+          : species === "alien"
+            ? "Alien Characters"
+            : "Character Card";
 
   return (
     <div className="flex-col justify-center p-2 bg-black w-screen min-h-screen">
       <NavBar />
-      <MainTitle name={name} />
+      <MainTitle
+        name={name}
+        color={pathname !== "/favorites" ? "white" : "red-500"}
+      />
 
-      {name !== "Character Card" && <SearchBar />}
+      {name !== "Character Card" && pathname !== "/favorites" && <SearchBar />}
       <Outlet />
       <Toaster
         position="bottom-center"

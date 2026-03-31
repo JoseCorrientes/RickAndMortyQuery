@@ -1,21 +1,33 @@
-import { FaCircle } from "react-icons/fa";
+import { FaHeart, FaCircle } from "react-icons/fa";
 import { SingleCharacterSkeletonCard, useSingleCharacter } from "..";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useLocation } from "react-router";
 
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { useParams } from "react-router";
+import { UseFavorites } from "..";
 
 export const CharacterById = () => {
   const { id } = useParams();
+  const { favorites, toggleFavorite } = UseFavorites();
 
-  const idBuscar = id;
+  const idBuscar = Number(id) || 1;
 
-  const { singleCharacterQuery } = useSingleCharacter(+idBuscar);
+  const { singleCharacterQuery } = useSingleCharacter(idBuscar);
   const { data, isLoading, isError } = singleCharacterQuery;
 
   const location = useLocation();
-  const backURL = location.state?.from || "/characters/All";
+
+  const { from, backPage, backSpecies } = location.state || {};
+
+  const goBackURL = () => {
+    if (from?.pathname === "/favorites") return "/favorites";
+    if (backSpecies && backPage)
+      return `/characters/${backSpecies}?page=${backPage}`;
+    return "/characters/All";
+  };
+
+  const backURL = goBackURL();
 
   useEffect(() => {
     if (isError) toast.error("Server Error. Try Later...");
@@ -28,6 +40,8 @@ export const CharacterById = () => {
       behavior: "smooth",
     });
   }, []);
+
+  const isFavorite = favorites.some((x) => x.id === idBuscar);
 
   return (
     <div className="flex flex-col items-center">
@@ -50,8 +64,22 @@ export const CharacterById = () => {
         {data && (
           <div
             key={data.id}
-            className="bg-(--gris-tarjeta) sm:max-w-250 rounded-md flex flex-row flex-nowrap h-full"
+            className="relative bg-(--gris-tarjeta) sm:max-w-250 rounded-md flex flex-row flex-nowrap h-full"
           >
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleFavorite(data);
+              }}
+              className="absolute top-8 right-8"
+            >
+              <FaHeart
+                size={50}
+                className={isFavorite ? "text-red-500" : "text-gray-400"}
+              />
+            </button>
+
             <div className="flex w-1/3 rounded-bl-md rounded-tl-md bg-white overflow-hidden aspect-square">
               <img className="w-full h-full object-cover" src={data.image} />
             </div>
@@ -70,7 +98,7 @@ export const CharacterById = () => {
               </p>
               <div className="mt-3 flex flex-row justify-start items-center">
                 <FaCircle
-                  className={`w-2 ${status !== "Dead" ? "text-green-500" : "text-red-700"}`}
+                  className={`w-2 ${data.status !== "Dead" ? "text-green-500" : "text-red-700"}`}
                 />
                 <p className="pl-2 text-white text-s font-medium">
                   {" "}

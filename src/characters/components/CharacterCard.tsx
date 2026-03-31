@@ -1,4 +1,5 @@
-import { FaCircle } from "react-icons/fa";
+import { FaHeart, FaCircle } from "react-icons/fa";
+
 import {
   type Gender,
   type Species,
@@ -8,6 +9,8 @@ import {
 } from "..";
 import { Link, useLocation } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
+import { UseFavorites } from "..";
+// import { toast } from "sonner";
 
 interface Props {
   id: number;
@@ -38,6 +41,10 @@ export const CharacterCard = ({
 }: Props) => {
   const queryClient = useQueryClient();
 
+  const { favorites, toggleFavorite } = UseFavorites();
+
+  const isFavorite = favorites.some((item) => item.id === id);
+
   const URLlocation = useLocation();
 
   const handlePrefetchCharacter = async (id: number) => {
@@ -56,8 +63,32 @@ export const CharacterCard = ({
     >
       <div
         key={id}
-        className="bg-(--gris-tarjeta) rounded-md shadow-md flex flex-row flex-nowrap justify-start shrink-0 h-full hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
+        className="relative bg-(--gris-tarjeta) rounded-md shadow-md flex flex-row flex-nowrap justify-start shrink-0 h-full hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
       >
+        <button
+          className="absolute top-4 right-4 text-white"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFavorite({
+              id,
+              name,
+              status,
+              species,
+              type,
+              gender,
+              origin,
+              location,
+              image,
+            });
+          }}
+        >
+          <FaHeart
+            size={30}
+            className={isFavorite ? "text-red-500" : "text-gray-600"}
+          />
+        </button>
+
         <div className="flex w-1/3 h-full rounded-bl-md rounded-tl-md bg-white overflow-hidden aspect-square">
           <img className="w-full h-full object-cover" src={image} />
         </div>

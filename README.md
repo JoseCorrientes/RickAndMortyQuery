@@ -10,9 +10,7 @@ I will uploading in differentes stages of developing.
 - Implemented Error management
 - Implemented Search Box
 - Implemented Characters List Route Refactorization.
-
-  Favorties Card - unimplemented yet<br>
-  InfiniteQuery on All List - unimplemented yet
+- Implemented Favorites Card<br>
 
 ## Install
 
