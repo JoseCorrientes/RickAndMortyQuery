@@ -27,4 +27,4 @@ It was development using ReactJs, TanStack Query, TailwindCSS etc.
 <img src="https://github.com/user-attachments/assets/5317f57e-a093-4f5c-ba6e-dd530cf42c70" alt="Medium" width="200" />
 
 ### Full Size (1920px)
-<img scr="https://github.com/user-attachments/assets/f71d9d69-558d-4e59-8a9f-a77023124854" alt="Full Size" width="200"/>
+<img src="https://github.com/user-attachments/assets/f71d9d69-558d-4e59-8a9f-a77023124854" alt="Full Size" width="200" />
