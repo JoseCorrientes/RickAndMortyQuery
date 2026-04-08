@@ -32,7 +32,6 @@ export { CharacterById } from "./pages/CharacterById";
 export { CharacterSkeletonList } from "./components/CharacterSkeletonList";
 export { CharacterSkeletonCard } from "./components/CharacterSkeletonCard";
 export { SingleCharacterSkeletonCard } from "./components/SingleCharacterSkeletonCard";
-export { FavoritesList } from "../characters/pages/FavoritesList";
 
 //services-Actions
 export * as charactersActions from "./services/actions";

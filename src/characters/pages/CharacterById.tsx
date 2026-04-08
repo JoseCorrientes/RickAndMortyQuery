@@ -2,7 +2,6 @@ import { FaHeart, FaCircle } from "react-icons/fa";
 import { SingleCharacterSkeletonCard, useSingleCharacter } from "..";
 import { Link, useLocation } from "react-router";
 
-import { toast } from "sonner";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { UseFavorites } from "..";
@@ -18,20 +17,15 @@ export const CharacterById = () => {
 
   const location = useLocation();
 
-  const { from, backPage, backSpecies } = location.state || {};
+  const { from } = location.state || {};
 
   const goBackURL = () => {
     if (from?.pathname === "/favorites") return "/favorites";
-    if (backSpecies && backPage)
-      return `/characters/${backSpecies}?page=${backPage}`;
+    if (from?.pathname && from?.search) return `${from.pathname}${from.search}`;
     return "/characters/All";
   };
 
   const backURL = goBackURL();
-
-  useEffect(() => {
-    if (isError) toast.error("Server Error. Try Later...");
-  }, [isError]);
 
   useEffect(() => {
     window.scrollTo({
@@ -44,16 +38,16 @@ export const CharacterById = () => {
   const isFavorite = favorites.some((x) => x.id === idBuscar);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="sm:h-100 flex justify-center">
+    <div className="flex flex-col items-center min-h-screen py-10 px-4">
+      <div className="w-full flex justify-center">
         {isError && (
-          <div className="flex flex-col items-center justify-center ">
-            <h1 className="mt-10 text-white text-4xl w-screen h-auto text-center font-black font-fredoka">
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="mt-10 mb-6 text-white text-4xl text-center font-black font-fredoka">
               No available card...
             </h1>
             <Link
               to={backURL}
-              className="mt-4 bg-gray-400 px-4 py-2 cursor-pointer text-white rounded-md hover:shadow-lg hover:shadow-amber-700 hover:ring-2 hover:ring-amber-700"
+              className="mt-4 bg-gray-400 px-4 py-2 text-white rounded-md hover:ring-2 hover:ring-amber-700"
             >
               Back
             </Link>
@@ -61,10 +55,11 @@ export const CharacterById = () => {
         )}
 
         {isLoading && <SingleCharacterSkeletonCard />}
+
         {data && (
           <div
             key={data.id}
-            className="relative bg-(--gris-tarjeta) sm:max-w-250 rounded-md flex flex-row flex-nowrap h-full"
+            className="relative bg-(--gris-tarjeta) w-full max-w-4xl rounded-2xl flex flex-col md:flex-row overflow-hidden border border-gray-800 shadow-2xl"
           >
             <button
               onClick={(e) => {
@@ -72,55 +67,77 @@ export const CharacterById = () => {
                 e.stopPropagation();
                 toggleFavorite(data);
               }}
-              className="absolute top-8 right-8"
+              className="absolute top-4 left-4 z-10 bg-black/40 p-3 rounded-full backdrop-blur-sm hover:bg-black/60 transition-all cursor-pointer group"
             >
               <FaHeart
-                size={50}
-                className={isFavorite ? "text-red-500" : "text-gray-400"}
+                size={22}
+                className={`transition-transform group-hover:scale-110 ${isFavorite ? "text-red-500" : "text-white/70"}`}
               />
             </button>
 
-            <div className="flex w-1/3 rounded-bl-md rounded-tl-md bg-white overflow-hidden aspect-square">
-              <img className="w-full h-full object-cover" src={data.image} />
+            <div className="w-full md:w-1/2 aspect-square">
+              <img
+                className="w-full h-full object-cover"
+                src={data.image}
+                alt={data.name}
+              />
             </div>
-            <div className="flex-col w-2/3 py-2 px-4">
-              <h3 className="w-full text-left font-fredoka text-bold text-2xl text-white font-bold">
-                {data.name}
-              </h3>
 
-              <p className="text-white text-xs font-medium">
-                {" "}
-                {data.species} - {data.gender}
-              </p>
-              <p className="text-orange-400 text-xs font-medium">
-                {" "}
-                {data.type}
-              </p>
-              <div className="mt-3 flex flex-row justify-start items-center">
+            <div className="w-full md:w-1/2 p-4 sm:p-12 flex flex-col justify-center">
+              <h2 className="font-fredoka text-4xl sm:text-5xl text-white font-black mb-2 leading-tight  tracking-tight">
+                {data.name}
+              </h2>
+
+              <div className="flex items-center gap-2 mb-4">
                 <FaCircle
-                  className={`w-2 ${data.status !== "Dead" ? "text-green-500" : "text-red-700"}`}
+                  className={`w-3 ${data.status === "Alive" ? "text-green-500" : data.status === "Dead" ? "text-red-600" : "text-gray-400"}`}
                 />
-                <p className="pl-2 text-white text-s font-medium">
-                  {" "}
-                  {data.status}
+                <p className="text-white text-lg font-medium">
+                  {data.status} - {data.species}
                 </p>
               </div>
-              <p className="mt-3 w-full text-(--gris-tarjeta-letras) text-xs font-medium">
-                Last Known location:
-              </p>
-              <p className="mt-1 w-full text-white text-lg font-normal">
-                {data.location.name}
-              </p>
-              <p className="flex mt-3 w-full text-(--gris-tarjeta-letras)  text-xs font-medium items-start">
-                First seen in:
-              </p>
-              <p className="mt-1 w-full text-white text-lg font-normal">
-                {data.origin.name}
-              </p>
+
+              {data.type && (
+                <p className="text-orange-400 text-sm font-bold uppercase mb-4 tracking-widest">
+                  {data.type}
+                </p>
+              )}
+              <div>
+                <p className="text-(--gris-tarjeta-letras) text-xs font-bold uppercase tracking-widest">
+                  Gender:
+                </p>
+                <p className="pl-4 mb-4 text-white text-xl font-light hover:text-orange-300 transition-colors">
+                  {data.gender}
+                </p>
+              </div>
+
+              <hr className="border-gray-800" />
+              <div className="space-y-6 border-t border-gray-700/50 pt-6">
+                <div>
+                  <p className="text-(--gris-tarjeta-letras) text-xs font-bold uppercase tracking-widest">
+                    Last Known location:
+                  </p>
+                  <p className="pl-4 text-white text-xl font-light hover:text-orange-300 transition-colors">
+                    {data.location.name}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-(--gris-tarjeta-letras) text-xs font-bold uppercase tracking-widest">
+                    First seen in:
+                  </p>
+                  <p className="pl-4 text-white text-xl font-light hover:text-orange-300 transition-colors">
+                    {data.origin.name === "unknown"
+                      ? "Unknown"
+                      : data.origin.name}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         )}
       </div>
+
       {data && (
         <Link
           to={backURL}

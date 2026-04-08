@@ -1,5 +1,5 @@
 import { type Character, charactersApi, type CharactersPage } from "..";
-// import { slow } from "../../shared";
+import { slow } from "../../shared";
 
 interface GetProductsOptions {
   species?: string;
@@ -12,7 +12,7 @@ export const getProducts = async ({
   page = 1,
   name,
 }: GetProductsOptions): Promise<CharactersPage> => {
-  //   await slow(2);
+  //   await slow(3);
 
   const params = new URLSearchParams();
   if (name) params.append("name", name);
@@ -26,7 +26,7 @@ export const getProducts = async ({
 };
 
 export const getSingleProduct = async (id: number): Promise<Character> => {
-  //   await slow(2);
+  //   await slow(4);
 
   const { data } = await charactersApi.get<Character>(`/character/${id}`);
   return data;

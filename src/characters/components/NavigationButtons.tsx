@@ -14,7 +14,7 @@ export const NavigationButtons = ({
   previousPage,
 }: Props) => {
   return (
-    <div className="flex justify-center items-center gap-4">
+    <div className="flex justify-center items-center gap-4 mb-4">
       <button
         disabled={!prevButtonActive}
         onClick={previousPage}

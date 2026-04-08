@@ -6,9 +6,10 @@ import { mainRouter } from "./router";
 import { TanStackProvider } from "./plugins";
 
 createRoot(document.getElementById("root")!).render(
-  //   <StrictMode>
-  <TanStackProvider>
-    <RouterProvider router={mainRouter} />
-  </TanStackProvider>,
-  //   </StrictMode>,
+  <StrictMode>
+    <TanStackProvider>
+      <RouterProvider router={mainRouter} />
+    </TanStackProvider>
+    ,
+  </StrictMode>,
 );

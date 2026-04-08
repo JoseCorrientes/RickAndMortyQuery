@@ -2,15 +2,17 @@
 
 ## Info
 
-This Repo will contains an SPA that uses the Rick and Morty free API.
-I'll use TanStack Query to mantain, update and Remove elements in the cache.
-I will uploading in differentes stages of developing.
+This Repo contains an SPA that uses the Rick and Morty free API.
+I used TanStack Query to mantain, update and Remove elements in the cache.
+
+It was development using ReactJs, TanStack Query, TailwindCSS etc.
 
 - Implemented manual paging over All, Humans and Aliens
 - Implemented Error management
 - Implemented Search Box
 - Implemented Characters List Route Refactorization.
-- Implemented Favorites Card<br>
+- Implemented Favorites Card.
+- Implemented Responsived Layout<br>
 
 ## Install
 

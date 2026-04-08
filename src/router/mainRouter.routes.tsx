@@ -1,6 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { GeneralLayout } from "../shared";
-import { CharactersList, CharacterById, FavoritesList } from "../characters/";
+import { CharactersList, CharacterById } from "../characters/";
+import { lazy } from "react";
+
+const FavoritesList = lazy(() => import("../characters/pages/FavoritesList"));
 
 export const mainRouter = createBrowserRouter([
   {

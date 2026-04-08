@@ -18,73 +18,53 @@ export const NavBar = () => {
   const finalSearch = params.toString();
 
   return (
-    <div className="shrink-0 flex-col sm:flex-row sm:px-4 h-auto sm:h-auto py-2 gap-y-2 sm:gap-y-0 flex items-center  justify-start bg-black rounded-md border-2 border-gray-600 text-white">
-      <div className="flex shrink-0 w-auto justify-center sm:justify-start">
-        <img src={RickAndMortyTitle2} className="h-9 w-auto" />
+    <div className="shrink-0 flex flex-col sm:flex-row items-center justify-between bg-black rounded-md border-2 border-gray-600 text-white p-2 sm:px-4 h-auto min-w-0 overflow-hidden ">
+      <div className="flex shrink-0 w-auto justify-center sm:justify-start mb-2 sm:mb-0">
+        <img
+          src={RickAndMortyTitle2}
+          className="h-7 sm:h-9 w-auto object-contain"
+        />
       </div>
-      <ul className="flex w-full items-center justify-center gap-4 pb-2 sm:pb-0">
+
+      <ul className="flex flex-wrap sm:flex-nowrap w-full sm:w-auto items-center justify-center gap-1 min-[400px]:gap-3 md:gap-4">
         <li
-          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${species == "All" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-125"}`}
+          className={`px-2 py-1 cursor-pointer font-fredoka text-sm sm:text-lg font-light transition-all ${species == "All" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-110"}`}
         >
           {location.pathname !== "/favorites" && species === "All" ? (
-            <h1 className="cursor-default ">All</h1>
+            "All"
           ) : (
-            <Link
-              to={{
-                pathname: `/characters/All`,
-                search: finalSearch,
-              }}
-            >
-              All
-            </Link>
+            <Link to={`/characters/All?${finalSearch}`}>All</Link>
           )}
         </li>
+
         <li
-          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${species === "human" ? "text-gray-100 rounded-lg bg-gray-500 " : "text-white  hover:scale-125"}`}
+          className={`px-2 py-1 cursor-pointer font-fredoka text-sm sm:text-lg font-light transition-all ${species === "human" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-110"}`}
         >
           {location.pathname !== "/favorites" && species === "human" ? (
-            <h1 className="cursor-default ">Humans</h1>
+            "Humans"
           ) : (
-            <Link
-              to={{
-                pathname: "/characters/human",
-                search: finalSearch,
-              }}
-            >
-              Humans
-            </Link>
+            <Link to={`/characters/human?${finalSearch}`}>Humans</Link>
           )}
         </li>
+
         <li
-          className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${species === "alien" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-125"}`}
+          className={`px-2 py-1 cursor-pointer font-fredoka text-sm sm:text-lg font-light transition-all ${species === "alien" ? "text-gray-100 rounded-lg bg-gray-500" : "text-white hover:scale-110"}`}
         >
           {location.pathname !== "/favorites" && species == "alien" ? (
-            <h1 className="cursor-default">Aliens</h1>
+            "Aliens"
           ) : (
-            <Link
-              to={{
-                pathname: "/characters/alien",
-                search: finalSearch,
-              }}
-            >
-              Aliens
-            </Link>
+            <Link to={`/characters/alien?${finalSearch}`}>Aliens</Link>
           )}
         </li>
+
         {favoritesExist && (
           <li
-            className={`px-2 cursor-pointer h-full font-fredoka text-lg font-light ${location.pathname === "/favorites" ? "text-gray-100 rounded-lg bg-red-500 " : "text-red-500  hover:scale-125"}`}
+            className={`px-2 py-1 cursor-pointer font-fredoka text-sm sm:text-lg font-light transition-all ${location.pathname === "/favorites" ? "text-gray-100 rounded-lg bg-red-500" : "text-red-500 hover:scale-110"}`}
           >
             {location.pathname === "/favorites" ? (
-              <h1 className="cursor-default ">Favorites</h1>
+              "Favorites"
             ) : (
-              <Link
-                to={{
-                  pathname: "/favorites",
-                }}
-              >
-                Favorites
-              </Link>
+              <Link to="/favorites">Favorites</Link>
             )}
           </li>
         )}

@@ -1,29 +1,34 @@
 export const SingleCharacterSkeletonCard = () => {
   return (
-    <div className="animate-pulse w-105 shrink sm:w-145  bg-(--gris-tarjeta) rounded-md shadow-md flex justify-start sm:shrink-0 h-full">
-      <div
-        className="
-       flex w-1/3 h-auto rounded-bl-md rounded-tl-md"
-      >
-        <div className="rounded-bl-md rounded-tl-md  h-auto w-full m-2 bg-gray-500 " />
+    <div className="w-full max-w-4xl bg-(--gris-tarjeta) rounded-2xl flex flex-col md:flex-row overflow-hidden border border-gray-800 animate-pulse min-h-[450px]">
+      <div className="w-full md:w-1/2 bg-gray-600 aspect-square md:h-auto shrink-0"></div>
+
+      <div className="w-full md:w-1/2 p-4 sm:p-12 flex flex-col justify-center space-y-6 flex-1 min-w-0">
+        <div className="h-12 bg-gray-600 rounded-md w-3/4"></div>
+
+        <div className="flex items-center gap-2">
+          <div className=" h-4 bg-gray-600 rounded-full w-4 shrink-0"></div>
+          <div className="h-6 bg-gray-600 rounded w-1/3"></div>
+        </div>
+        <div>
+          <div className="h-3 bg-gray-600/50 rounded w-1/4 mb-3"></div>
+          <div className="ml-4 mb-2 h-7 bg-gray-600 rounded w-1/2"></div>
+        </div>
+
+        <hr className="border-gray-800" />
+
+        <div className="space-y-6 pt-2">
+          <div>
+            <div className="h-3 bg-gray-600/50 rounded w-1/4 mb-3"></div>
+            <div className="ml-4 h-7 bg-gray-600 rounded w-5/6"></div>
+          </div>
+
+          <div>
+            <div className="h-3 bg-gray-600/50 rounded w-1/4 mb-3"></div>
+            <div className="ml-4 h-7 bg-gray-600 rounded w-5/6"></div>
+          </div>
+        </div>
       </div>
-
-      <div className="flex-col w-2/3 py-2 px-4 ">
-        <div className="flex shrink bg-gray-500 sm:w-40 h-8 rounded-sm  " />
-
-        <div className="flex shrink bg-gray-500 w-25 h-2 rounded-sm mt-2  " />
-
-        <div className="flex shrink bg-gray-500 w-15 h-3 rounded-sm mt-4" />
-
-        <div className="flex shrink bg-gray-500 w-25 h-2 rounded-sm mt-6  " />
-
-        <div className="flex shrink bg-gray-500 sm:w-40 h-4 rounded-sm mt-4" />
-
-        <div className="flex shrink bg-gray-500 w-25 h-2 rounded-sm mt-6  " />
-
-        <div className="flex shrink bg-gray-500 sm:w-40 h-4 rounded-sm mt-4" />
-      </div>
-      {/* <div className="w-15 h-10 rounded-md bg-gray-500" /> */}
     </div>
   );
 };
