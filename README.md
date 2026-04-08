@@ -18,3 +18,6 @@ It was development using ReactJs, TanStack Query, TailwindCSS etc.
 
 -npm install<br>
 -create .env file using the .env.template
+![rm320](https://github.com/user-attachments/assets/b4e1be08-9817-4382-ab2d-f752b57fb642)
+![rm1211](https://github.com/user-attachments/assets/5317f57e-a093-4f5c-ba6e-dd530cf42c70)
+![rm1920](https://github.com/user-attachments/assets/f71d9d69-558d-4e59-8a9f-a77023124854)
