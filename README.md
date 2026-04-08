@@ -20,6 +20,11 @@ It was development using ReactJs, TanStack Query, TailwindCSS etc.
 -create .env file using the .env.template
 
 ## Screen Captures
+### Mobile (320px)
 <img src="https://github.com/user-attachments/assets/b4e1be08-9817-4382-ab2d-f752b57fb642" alt="Mobile" width="200"/>
-![rm1211](https://github.com/user-attachments/assets/5317f57e-a093-4f5c-ba6e-dd530cf42c70)
-![rm1920](https://github.com/user-attachments/assets/f71d9d69-558d-4e59-8a9f-a77023124854)
+
+### Medium (320px)
+<img src="https://github.com/user-attachments/assets/5317f57e-a093-4f5c-ba6e-dd530cf42c70" alt="Medium" width="1211px"/>
+
+### Full Size (1920px)
+<img scr="https://github.com/user-attachments/assets/f71d9d69-558d-4e59-8a9f-a77023124854" alt="Full Size" width="1920px"/>
